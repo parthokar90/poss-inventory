@@ -1,61 +1,186 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# POS Inventory Management System (Laravel)
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+A complete **POS & Inventory Management System** built with **Laravel**, designed for small to medium businesses to manage products, stock, sales, purchases, customers, suppliers, and reports efficiently.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🚀 Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 🔐 Authentication & Roles
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+* Secure login & registration
+* Role-based access control (Admin, Manager, Staff)
 
-## Learning Laravel
+### 📦 Product Management
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+* Product CRUD (Create, Read, Update, Delete)
+* Category & Brand management
+* Barcode support
+* Product cost & selling price
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 🏪 Inventory Management
 
-## Laravel Sponsors
+* Real-time stock tracking
+* Low stock alerts
+* Stock adjustment (increase/decrease)
+* Warehouse / Store support (optional)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### 🧾 POS (Point of Sale)
 
-### Premium Partners
+* Fast POS interface
+* Barcode scanning
+* Cart system
+* Discount & tax support
+* Multiple payment methods (Cash / Card / Mobile Banking)
+* Invoice generation & print support
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
+### 👥 Customer & Supplier Management
 
-## Contributing
+* Customer CRUD
+* Supplier CRUD
+* Due tracking (customer & supplier)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 🛒 Purchase Management
 
-## Code of Conduct
+* Purchase from suppliers
+* Purchase history
+* Auto stock update on purchase
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 📊 Reports
 
-## Security Vulnerabilities
+* Daily / Monthly sales report
+* Purchase report
+* Profit & loss report
+* Stock report
+* Customer due report
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### ⚙️ Settings
 
-## License
+* Company profile
+* Tax & discount settings
+* Invoice settings
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---
+
+## 🛠 Tech Stack
+
+* **Backend:** Laravel (PHP)
+* **Frontend:** Blade / Bootstrap
+* **Database:** MySQL
+* **Authentication:** Laravel Auth
+
+---
+
+## 📂 Project Structure
+
+```
+pos-inventory/
+├── app/
+│   ├── Http/Controllers/
+│   ├── Models/
+│   └── Services/
+├── database/
+│   ├── migrations/
+│   └── seeders/
+├── resources/
+│   ├── views/
+│   └── js/
+├── routes/
+│   ├── web.php
+│   └── api.php
+├── public/
+└── README.md
+```
+
+---
+
+## ⚙️ Installation Guide
+
+### 1️⃣ Clone the Repository
+
+### 2️⃣ Install Dependencies
+
+```bash
+composer install
+npm install && npm run dev
+```
+
+### 3️⃣ Environment Setup
+
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+Update `.env` file with your database credentials:
+
+```env
+DB_DATABASE=pos_inventory
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+### 4️⃣ Run Migrations & Seeders
+
+```bash
+php artisan migrate --seed
+```
+
+### 5️⃣ Storage Link
+
+```bash
+php artisan storage:link
+```
+
+### 6️⃣ Run the Project
+
+```bash
+php artisan serve
+```
+
+Visit: `http://127.0.0.1:8000`
+
+
+## 🧪 Testing
+
+```bash
+php artisan test
+```
+
+---
+
+## 📌 Future Improvements
+
+* Multi-branch support
+* Mobile app integration
+* REST API for POS devices
+* Advanced analytics dashboard
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome!
+
+1. Fork the repository
+2. Create a new branch
+3. Commit your changes
+4. Open a pull request
+
+---
+
+## 📄 License
+
+This project is open-source and licensed under the **MIT License**.
+
+---
+
+## 👨‍💻 Author
+
+**Partho**
+Senior Software Developer
+Laravel | PHP | MySQL
+
+---
+
+⭐ If you like this project, don’t forget to give it a star!
