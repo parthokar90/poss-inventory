@@ -4,28 +4,28 @@ A complete **POS & Inventory Management System** built with **Laravel**, designe
 
 ---
 
-## 🚀 Features
+## Features
 
-### 🔐 Authentication & Roles
+### Authentication & Roles
 
 * Secure login & registration
 * Role-based access control (Admin, Manager, Staff)
 
-### 📦 Product Management
+### Product Management
 
 * Product CRUD (Create, Read, Update, Delete)
 * Category & Brand management
 * Barcode support
 * Product cost & selling price
 
-### 🏪 Inventory Management
+### Inventory Management
 
 * Real-time stock tracking
 * Low stock alerts
 * Stock adjustment (increase/decrease)
 * Warehouse / Store support (optional)
 
-### 🧾 POS (Point of Sale)
+### POS (Point of Sale)
 
 * Fast POS interface
 * Barcode scanning
@@ -34,19 +34,19 @@ A complete **POS & Inventory Management System** built with **Laravel**, designe
 * Multiple payment methods (Cash / Card / Mobile Banking)
 * Invoice generation & print support
 
-### 👥 Customer & Supplier Management
+### Customer & Supplier Management
 
 * Customer CRUD
 * Supplier CRUD
 * Due tracking (customer & supplier)
 
-### 🛒 Purchase Management
+### Purchase Management
 
 * Purchase from suppliers
 * Purchase history
 * Auto stock update on purchase
 
-### 📊 Reports
+### Reports
 
 * Daily / Monthly sales report
 * Purchase report
@@ -54,7 +54,7 @@ A complete **POS & Inventory Management System** built with **Laravel**, designe
 * Stock report
 * Customer due report
 
-### ⚙️ Settings
+### Settings
 
 * Company profile
 * Tax & discount settings
@@ -62,7 +62,7 @@ A complete **POS & Inventory Management System** built with **Laravel**, designe
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 * **Backend:** Laravel (PHP)
 * **Frontend:** Blade / Bootstrap
@@ -71,7 +71,7 @@ A complete **POS & Inventory Management System** built with **Laravel**, designe
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 pos-inventory/
@@ -94,7 +94,7 @@ pos-inventory/
 
 ---
 
-## ⚙️ Installation Guide
+## Installation Guide
 
 ### 1️⃣ Clone the Repository
 
@@ -141,7 +141,7 @@ php artisan serve
 Visit: `http://127.0.0.1:8000`
 
 
-## 🧪 Testing
+##  Testing
 
 ```bash
 php artisan test
@@ -149,7 +149,7 @@ php artisan test
 
 ---
 
-## 📌 Future Improvements
+##  Future Improvements
 
 * Multi-branch support
 * Mobile app integration
@@ -158,7 +158,7 @@ php artisan test
 
 ---
 
-## 🤝 Contributing
+##  Contributing
 
 Contributions are welcome!
 
@@ -169,13 +169,13 @@ Contributions are welcome!
 
 ---
 
-## 📄 License
+## License
 
 This project is open-source and licensed under the **MIT License**.
 
 ---
 
-## 👨‍💻 Author
+## Author
 
 **Partho**
 Senior Software Developer
