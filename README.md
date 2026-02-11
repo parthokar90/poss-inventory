@@ -1,4 +1,4 @@
-# POS Inventory Management System (Laravel)
+# POS Inventory Management System 
 
 A complete **POS & Inventory Management System** built with **Laravel**, designed for small to medium businesses to manage products, stock, sales, purchases, customers, suppliers, and reports efficiently.
 
