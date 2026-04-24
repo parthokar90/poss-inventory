@@ -14,7 +14,7 @@ class ProductTest extends TestCase
     /** @test */
     public function product_list_page_loads_successfully()
     {
-        $response = $this->get('/products');
+        $response = $this->get('/product');
 
         $response->assertStatus(200);
     }
@@ -24,7 +24,7 @@ class ProductTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $response = $this->actingAs($user)->post('/products', [
+        $response = $this->actingAs($user)->post('/product', [
             'name' => 'Laptop',
             'price' => 50000,
             'stock' => 10
@@ -41,7 +41,7 @@ class ProductTest extends TestCase
     {
         $product = Product::factory()->create();
 
-        $response = $this->put("/products/{$product->id}", [
+        $response = $this->put("/product/{$product->id}", [
             'name' => 'Updated Laptop',
             'price' => 60000
         ]);
