@@ -48,13 +48,13 @@ class ProductValidationRequest extends FormRequest
     {
           
         return [
-            'varient_id.required'        => 'Please Select One Variant',
+            // 'varient_id.required'        => 'Please Select One Variant',
             'product_name.required'      => 'Please Enter Name',
-            'product_cost.required'      => 'Please Enter Cost',
-            'product_price.required'     => 'Please Enter Price',
-            'product_alert_qty.required' => 'Please Enter Alert Quantity',
-            'product_brand.required'     => 'Please Select Brand',
-            'product_cat_id.required'    => 'Please Select Category',
+            // 'product_cost.required'      => 'Please Enter Cost',
+            // 'product_price.required'     => 'Please Enter Price',
+            // 'product_alert_qty.required' => 'Please Enter Alert Quantity',
+            // 'product_brand.required'     => 'Please Select Brand',
+            // 'product_cat_id.required'    => 'Please Select Category',
         ];
     }
 }
