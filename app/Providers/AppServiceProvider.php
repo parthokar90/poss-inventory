@@ -19,18 +19,6 @@ class AppServiceProvider extends ServiceProvider
 
         $total_notification = 0;
 
-        if (!app()->runningInConsole() && !app()->environment('testing')) {
-
-            try {
-                $total_notification = DB::table('product_warehouses')
-                    ->whereColumn('qty', '<=', 'alert_qty')
-                    ->count();
-
-            } catch (\Exception $e) {
-                $total_notification = 0;
-            }
-        }
-
         view()->share('total_notification', $total_notification);
     }
 }

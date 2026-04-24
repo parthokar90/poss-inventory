@@ -28,9 +28,19 @@ class ProductTest extends TestCase
         $user = factory(User::class)->create();
 
         $response = $this->actingAs($user)->post('/product', [
+            'product_type' => 'simple',
             'product_name' => 'Laptop',
+            'product_cost' => 40000,
             'product_price' => 50000,
-            'product_qty' => 10
+            'product_alert_qty' => 2,
+            'warehouse_id' => 1,
+
+            // IMPORTANT (fix crash)
+            'variant_warehouse_id' => [1],
+            'varient_id' => [1],
+            'price_addition' => [0],
+            'variant_qty' => [10],
+            'variant_rack' => ['A1']
         ]);
 
         $response->assertStatus(302);
