@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Models\User;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class AuthTest extends TestCase

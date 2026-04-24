@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Models\Product;
+use App\product\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class StockTest extends TestCase

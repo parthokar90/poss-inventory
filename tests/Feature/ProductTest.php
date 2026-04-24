@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Models\User;
-use App\Models\Product;
+use App\User;
+use App\product\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ProductTest extends TestCase
