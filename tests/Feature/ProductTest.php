@@ -28,15 +28,15 @@ class ProductTest extends TestCase
         $user = factory(User::class)->create();
 
         $response = $this->actingAs($user)->post('/product', [
-            'name' => 'Laptop',
-            'price' => 50000,
-            'stock' => 10
+            'product_name' => 'Laptop',
+            'product_price' => 50000,
+            'product_qty' => 10
         ]);
 
         $response->assertStatus(302);
 
         $this->assertDatabaseHas('products', [
-            'name' => 'Laptop'
+            'product_name' => 'Laptop'
         ]);
     }
 
@@ -48,14 +48,14 @@ class ProductTest extends TestCase
         $product = factory(Product::class)->create();
 
         $response = $this->actingAs($user)->put("/product/{$product->id}", [
-            'name' => 'Updated Laptop',
-            'price' => 60000
+            'product_name' => 'Updated Laptop',
+            'product_price' => 60000
         ]);
 
         $response->assertStatus(302);
 
         $this->assertDatabaseHas('products', [
-            'name' => 'Updated Laptop'
+            'product_name' => 'Updated Laptop'
         ]);
     }
 }

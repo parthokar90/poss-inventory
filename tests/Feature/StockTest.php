@@ -10,27 +10,25 @@ class StockTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
-    public function stock_increases_when_purchase_is_made()
+    public function test_stock_increases()
     {
-        $product = Product::factory()->create([
-            'stock' => 10
+        $product = factory(Product::class)->create([
+            'product_qty' => 10
         ]);
 
-        $product->increment('stock', 5);
+        $product->increment('product_qty', 5);
 
-        $this->assertEquals(15, $product->stock);
+        $this->assertEquals(15, $product->fresh()->product_qty);
     }
 
-    /** @test */
-    public function stock_decreases_when_sale_is_made()
+    public function test_stock_decreases()
     {
-        $product = Product::factory()->create([
-            'stock' => 20
+        $product = factory(Product::class)->create([
+            'product_qty' => 20
         ]);
 
-        $product->decrement('stock', 3);
+        $product->decrement('product_qty', 3);
 
-        $this->assertEquals(17, $product->fresh()->stock);
+        $this->assertEquals(17, $product->fresh()->product_qty);
     }
 }
