@@ -55,7 +55,7 @@ class ProductTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $product = factory(Product::class)->create();
+        $product = factory(\App\product\Product::class)->create();
 
         $response = $this->actingAs($user)->put("/product/{$product->id}", [
             'product_name' => 'Updated Laptop',
