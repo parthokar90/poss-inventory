@@ -21,7 +21,7 @@ class AuthTest extends TestCase
     /** @test */
     public function user_can_login()
     {
-        $user = User::factory()->create([
+        $user = factory(User::class)->create([
             'password' => bcrypt('password')
         ]);
 
