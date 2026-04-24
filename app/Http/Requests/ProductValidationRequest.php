@@ -23,20 +23,20 @@ class ProductValidationRequest extends FormRequest
      */
     public function rules(Request $request)
     {
-        $req='';
-        if($request->v_check!=null){
-           if($request->varient_id==null){
-               $req='required';
-           }
-        }
+        // $req='';
+        // if($request->v_check!=null){
+        //    if($request->varient_id==null){
+        //        $req='required';
+        //    }
+        // }
              return [
-            'varient_id' => $req,
+            // 'varient_id' => $req,
             'product_name' => 'required',
-            'product_cost' => 'required',
-            'product_price' => 'required',
-            'product_alert_qty' => 'required',
-            'product_brand' => 'required',
-            'product_cat_id' => 'required',
+            // 'product_cost' => 'required',
+            // 'product_price' => 'required',
+            // 'product_alert_qty' => 'required',
+            // 'product_brand' => 'required',
+            // 'product_cat_id' => 'required',
           ];
     }
     /**
