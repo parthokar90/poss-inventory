@@ -26,10 +26,26 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //default string length
+        // default string length
         Schema::defaultStringLength(191);
-        
-        $total_notification=ProductWarehouse::whereRaw('qty <= alert_qty')->count();
-        view()->share('total_notification',$total_notification);
+
+        try {
+
+            if (Schema::hasTable('product_warehouses')) {
+
+                $total_notification = ProductWarehouse::whereRaw(
+                    'qty <= alert_qty'
+                )->count();
+            } else {
+
+                $total_notification = 0;
+            }
+        } catch (\Exception $e) {
+
+            // Ignore DB errors during CI / composer install / migrations
+            $total_notification = 0;
+        }
+
+        view()->share('total_notification', $total_notification);
     }
 }
