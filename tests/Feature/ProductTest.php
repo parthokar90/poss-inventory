@@ -4,7 +4,7 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\User;
+use App\Models\User;
 use App\product\Product;
 
 class ProductTest extends TestCase
@@ -14,7 +14,7 @@ class ProductTest extends TestCase
     /** @test */
     public function product_list_page_loads_successfully()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $response = $this->actingAs($user)
             ->get('/product');
@@ -25,7 +25,7 @@ class ProductTest extends TestCase
     /** @test */
     public function product_can_be_created()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $response = $this->actingAs($user)->post('/product', [
             'product_type' => 'simple',
@@ -35,7 +35,7 @@ class ProductTest extends TestCase
             'product_alert_qty' => 2,
             'warehouse_id' => 1,
 
-            // IMPORTANT (fix crash)
+            // variant data (safe array inputs)
             'variant_warehouse_id' => [1],
             'varient_id' => [1],
             'price_addition' => [0],
@@ -53,9 +53,9 @@ class ProductTest extends TestCase
     /** @test */
     public function product_can_be_updated()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $product = factory(\App\product\Product::class)->create();
+        $product = Product::factory()->create();
 
         $response = $this->actingAs($user)->put("/product/{$product->id}", [
             'product_name' => 'Updated Laptop',
