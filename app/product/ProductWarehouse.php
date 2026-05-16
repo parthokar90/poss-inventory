@@ -3,21 +3,24 @@
 namespace App\product;
 
 use Illuminate\Database\Eloquent\Model;
+use App\warehouse\Warehouse;
+use App\varients\Varients;
+use App\product\Product;
 
 class ProductWarehouse extends Model
 {
-     // this function shows  warehouse name
-      public function Warehouses(){
-          return $this->belongsTo('App\Warehouse\Warehouse','warehouse_id');
-      }
+    public function Warehouses()
+    {
+        return $this->belongsTo(Warehouse::class, 'warehouse_id');
+    }
 
-      // this function shows variant name
-      public function Varient(){
-          return $this->belongsTo('App\varients\Varients','varient_id');
-      }
+    public function Varient()
+    {
+        return $this->belongsTo(Varients::class, 'varient_id');
+    }
 
-     // this function shows product details
-      public function Products(){
-          return $this->belongsTo('App\product\Product','product_id');
-      }
+    public function Products()
+    {
+        return $this->belongsTo(Product::class, 'product_id');
+    }
 }

@@ -10,7 +10,7 @@ use App\product\ProductWarehouse;
 use App\product\Product;
 use App\varients\ProductVarient;
 use App\varients\Varients;
-use App\Tax\Taxrate;
+use App\tax\Taxrate;
 use App\purchase\Purchase;
 use App\purchase\PurchaseItem;
 use App\purchase\TemporaryPurchase;
