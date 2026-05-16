@@ -1,4 +1,4 @@
-![Tests](https://github.com/parthokar90/inventory/actions/workflows/ci.yml/badge.svg)
+![Tests](https://github.com/parthokar90/poss-inventory/actions/workflows/ci.yml/badge.svg)
 
 # Inventory Management System
 
