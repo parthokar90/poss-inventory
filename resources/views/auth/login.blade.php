@@ -49,7 +49,7 @@
         @enderror
     </div>
 
-    <div class="flex items-center justify-between gap-4">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mt-8">
         <div class="flex items-center">
             <input type="checkbox" name="remember" id="remember"
                 class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 checked:bg-blue-600 cursor-pointer">
@@ -58,8 +58,8 @@
             </label>
         </div>
 
-        <div>
-            <button class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded shadow-md hover:shadow-lg active:bg-blue-800 transition duration-150 ease-in-out uppercase text-sm tracking-wider"
+        <div class="w-full sm:w-auto">
+            <button class="w-full sm:w-auto text-center bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 px-6 rounded shadow-md hover:shadow-lg active:bg-blue-800 transition duration-150 ease-in-out uppercase text-sm tracking-wider"
                 type="submit">
                 SIGN IN
             </button>

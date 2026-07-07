@@ -15,9 +15,9 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 
-<body class="h-full flex items-center justify-center bg-slate-100 px-4 sm:px-6 lg:px-8">
+<body class="min-h-full flex flex-col justify-start sm:justify-center sm:items-center bg-slate-50 pt-12 sm:pt-0 px-4">
 
-    <div class="max-w-md w-full space-y-8 bg-white p-8 rounded-xl shadow-lg border border-gray-100">
+    <div class="w-full sm:max-w-md bg-white p-6 sm:p-8 rounded-xl shadow-md sm:shadow-lg border border-gray-100">
         @yield('content')
     </div>
 
