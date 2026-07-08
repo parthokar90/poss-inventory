@@ -43,7 +43,6 @@ services:
       - "33062:3306"   
     volumes:
       - mysql_data:/var/lib/mysql
-      - ./inventory_backup.sql:/docker-entrypoint-initdb.d/dump.sql
     networks:
       - inventory_net
 
