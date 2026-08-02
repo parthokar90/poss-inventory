@@ -25,6 +25,10 @@ Route::get('/cc', function () {
    return '<h1>Clear Cache</h1>';
 });
  
+Route::get('/clear', function() {
+    Artisan::call('optimize:clear');
+    return 'Laravel cache cleared successfully!';
+});
 
 
 //---------------------------------- Auth route start -------------------------------------\\  
