@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-//---------------------------------- Cash clear route start --------------------------------\\  
+//--------------Cash clear route start -----------------\\  
 Route::get('/cc', function () {
    Artisan::call('cache:clear');
    Artisan::call('route:clear');
