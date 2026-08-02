@@ -14,7 +14,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: 📂 Sync files via FTP
-        uses: SamKirschner/ftp-deploy-action@v4.3.5
+        uses: SamKirland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
