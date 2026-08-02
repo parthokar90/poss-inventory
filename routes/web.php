@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-//--------------Cash clear route start -----------------\\  
+  
 Route::get('/cc', function () {
    Artisan::call('cache:clear');
    Artisan::call('route:clear');
@@ -24,7 +24,7 @@ Route::get('/cc', function () {
    Artisan::call('config:cache');
    return '<h1>Clear Cache</h1>';
 });
-//-----------------------------Cash clear route end ---------------------------------\\  
+ 
 
 
 //---------------------------------- Auth route start -------------------------------------\\  
