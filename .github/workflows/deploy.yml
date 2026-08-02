@@ -3,17 +3,17 @@ name: Deploy Laravel to cPanel
 on:
   push:
     branches:
-      - master 
+      - master
 
 jobs:
   web-deploy:
-    name: 🎉 Deploying Code to cPanel
+    name: Deploying Code
     runs-on: ubuntu-latest
     steps:
-      - name: 🚚 Get latest code
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: 📂 Sync files via FTP
+      - name: Sync files via FTP
         uses: SamKirland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
