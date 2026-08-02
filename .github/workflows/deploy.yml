@@ -3,23 +3,24 @@ name: Deploy Laravel to cPanel
 on:
   push:
     branches:
-      - master
+      - master 
 
 jobs:
   web-deploy:
-    name: 🎉 Deploying Code
+    name: 🎉 Deploying Code to cPanel
     runs-on: ubuntu-latest
     steps:
       - name: 🚚 Get latest code
         uses: actions/checkout@v4
 
       - name: 📂 Sync files via FTP
-        uses: SamKirsch/ftp-deploy-action@v4.3.5
+        uses: SamKirschner/ftp-deploy-action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /public_html/inventory/
+          port: 21
+          server-dir: ./
           exclude: |
             **/.git**
             **/.git**/**
