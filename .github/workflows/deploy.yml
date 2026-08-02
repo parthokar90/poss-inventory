@@ -7,14 +7,14 @@ on:
 
 jobs:
   web-deploy:
-    name: Deploying Code
+    name: Deploying Code to cPanel
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: 🚚 Get latest code
         uses: actions/checkout@v4
 
-      - name: Sync files via FTP
-        uses: SamKirland/FTP-Deploy-Action@v4.3.5
+      - name: 📂 Sync files via FTP
+        uses: wlixcc/FTP-Deploy-Action@v1.2.4
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
@@ -22,10 +22,10 @@ jobs:
           port: 21
           server-dir: ./
           exclude: |
-            **/.git**
-            **/.git**/**
-            **/node_modules/**
-            **/vendor/**
+            .git*
+            .git*/**
+            node_modules/**
+            vendor/**
             .env
             storage/*.key
             storage/logs/*
