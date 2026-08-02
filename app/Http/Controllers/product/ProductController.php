@@ -30,7 +30,8 @@ class ProductController extends Controller
      */
     public function index(ProductService $service)
     {
-        return view('product.index', ['list' => $service->getIndex()]);
+       echo min([10,20,30]);
+        //return view('product.index', ['list' => $service->getIndex()]);
     }
 
     /**
