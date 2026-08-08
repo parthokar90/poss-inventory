@@ -2,7 +2,7 @@
     <div class="text-xxs text-slate-500 font-medium tracking-wide">
         &copy; {{ date('Y') }}
         <a href="#" class="text-slate-400 hover:text-blue-400 font-semibold transition-colors">
-            Innovative Technology & Engineering
+            Developed By Partho
         </a>.
     </div>
 </div>

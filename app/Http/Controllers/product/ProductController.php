@@ -30,8 +30,7 @@ class ProductController extends Controller
      */
     public function index(ProductService $service)
     {
-       echo min([10,20,30]);
-        //return view('product.index', ['list' => $service->getIndex()]);
+        return view('product.index', ['list' => $service->getIndex()]);
     }
 
     /**
@@ -58,6 +57,19 @@ class ProductController extends Controller
         } catch (\Exception $e) {
             return back()->with("error", $e->getMessage());
         }
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id, ProductService $service)
+    {
+        // ProductService এ getEditData বা specific getProductData মেথড থাকলে তা ব্যবহার করতে পারেন
+        $product = Product::with(['category', 'brand'])->findOrFail($id);
+        return view('product.show', compact('product'));
     }
 
     /**

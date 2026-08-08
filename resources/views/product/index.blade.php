@@ -3,6 +3,8 @@
 
 @push('css')
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<!-- Font Awesome CDN (আইকন দেখানোর জন্য) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 @endpush
 
 @section('content')
@@ -17,7 +19,7 @@
     </div>
 
     <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-        <div class="overflow-x-auto p-4">
+        <div class="p-4">
             <table id="productTable" class="w-full text-left border-collapse">
                 <thead>
                     <tr class="bg-slate-50 text-slate-500 uppercase text-xs tracking-wider border-b border-slate-200">
@@ -33,7 +35,7 @@
                 <tbody class="divide-y divide-slate-100">
                     @forelse($list as $key => $item)
                     <tr class="hover:bg-slate-50 transition-colors">
-                        <td class="py-3 px-6 text-slate-500">{{ ++ $key }}</td>
+                        <td class="py-3 px-6 text-slate-500">{{ $loop->iteration }}</td>
                         <td class="py-3 px-6">
                             <span class="inline-block bg-slate-100 text-slate-600 text-xs font-medium px-2.5 py-1 rounded-md">{{$item->product_code}}</span>
                         </td>
@@ -45,20 +47,20 @@
                                 {{ optional($item->category)->category_name ?? '—' }}
                             </span>
                         </td>
-                        <td class="py-3 px-6">
+                        <td class="py-3 px-6 text-center">
                             <div class="flex items-center justify-center gap-2">
-                                <a href="{{route('product.show', $item->id)}}" title="View" class="inline-flex items-center justify-center w-9 h-9 rounded-md text-slate-500 hover:bg-slate-100 transition">
-                                    <i class="fas fa-eye"></i>
+                                <a href="{{route('product.show', $item->id)}}" title="View" class="inline-flex items-center justify-center w-9 h-9 rounded-md text-slate-600 bg-slate-100 hover:bg-slate-200 transition">
+                                    <i class="fa-solid fa-eye text-sm"></i>
                                 </a>
-                                <a href="{{route('product.edit', $item->id)}}" title="Edit" class="inline-flex items-center justify-center w-9 h-9 rounded-md text-blue-600 hover:bg-blue-50 transition">
-                                    <i class="fas fa-edit"></i>
+                                <a href="{{route('product.edit', $item->id)}}" title="Edit" class="inline-flex items-center justify-center w-9 h-9 rounded-md text-blue-600 bg-blue-50 hover:bg-blue-100 transition">
+                                    <i class="fa-solid fa-pen-to-square text-sm"></i>
                                 </a>
                             </div>
                         </td>
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="8" class="text-center py-10 text-slate-400">No Data Found</td>
+                        <td colspan="7" class="text-center py-10 text-slate-400">No Data Found</td>
                     </tr>
                     @endforelse
                 </tbody>
@@ -78,6 +80,7 @@
             searching: true,
             ordering: true,
             info: true,
+            responsive: true,
             language: {
                 searchPlaceholder: "Search product...",
                 lengthMenu: "Show _MENU_ entries",
