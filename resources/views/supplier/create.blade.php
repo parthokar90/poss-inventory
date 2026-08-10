@@ -1,134 +1,154 @@
- @extends('admin.layouts.master')
-   @section('title') Dashboard | Add Supplier @endsection
-   @section('content')
-   <style>
-   .error{
-       color:red;
-    }
-   </style>
-       <div class="container-fluid">
-            <div class="block-header">
-                <h2>SUPPLIER</h2>
-            </div>
-            <div class="row clearfix">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <div class="card">
-                        <div class="header">
-                            <h2>CREATE SUPPLIER INFORMATION</h2>
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="{{route('supplier.index')}}">List</a></li>
-                                        <li><a href="{{route('supplier.create')}}">Add</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="body">
-                          <form action="{{route('supplier.store')}}" method="POST" enctype="multipart/form-data">
-                             @csrf 
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="supplier_name" autocomplete="off" value="{{old('supplier_name')}}">
-                                        <label class="form-label">Supplier Name *</label>
-                                         @if($errors->has('supplier_name'))
-                                            <div class="error">
-                                                {{$errors->first('supplier_name')}}
-                                            </div>
-                                        @endif
-                                    </div>
-                                </div>
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="email" class="form-control" name="supplier_email" autocomplete="off" value="{{old('supplier_email')}}">
-                                        <label class="form-label">Email *</label>
-                                         @if($errors->has('supplier_email'))
-                                            <div class="error">
-                                                {{$errors->first('supplier_email')}}
-                                            </div>
-                                        @endif
-                                    </div>
-                                </div>
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="supplier_phone" autocomplete="off" value="{{old('supplier_phone')}}">
-                                        <label class="form-label">Phone *</label>
-                                         @if($errors->has('supplier_phone'))
-                                            <div class="error">
-                                                {{$errors->first('supplier_phone')}}
-                                            </div>
-                                        @endif
-                                    </div>
-                                </div>
+@extends('admin.layouts.master')
+@section('title') Dashboard | Add Supplier @endsection
 
-                                  <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="country" autocomplete="off" value="{{old('country')}}">
-                                        <label class="form-label">Country *</label>
-                                         @if($errors->has('country'))
-                                            <div class="error">
-                                                {{$errors->first('country')}}
-                                            </div>
-                                        @endif
-                                    </div>
-                                </div>
+@section('content')
+<div class="container mx-auto px-4 py-6">
+    {{-- Page Header --}}
+    <div class="mb-6">
+        <h2 class="text-2xl font-bold text-gray-800 uppercase tracking-wider">Supplier</h2>
+    </div>
 
-                                 <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="city" autocomplete="off" value="{{old('city')}}">
-                                        <label class="form-label">City *</label>
-                                         @if($errors->has('city'))
-                                            <div class="error">
-                                                {{$errors->first('city')}}
-                                            </div>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                 <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="state" autocomplete="off" value="{{old('state')}}">
-                                        <label class="form-label">State *</label>
-                                         @if($errors->has('state'))
-                                            <div class="error">
-                                                {{$errors->first('state')}}
-                                            </div>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                 <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="postcode" autocomplete="off" value="{{old('postcode')}}">
-                                        <label class="form-label">Post Code *</label>
-                                         @if($errors->has('postcode'))
-                                            <div class="error">
-                                                {{$errors->first('postcode')}}
-                                            </div>
-                                        @endif
-                                    </div>
-                                </div>
-                     
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <textarea name="supplier_address" cols="30" rows="5" maxlength="100" class="form-control no-resize">{{old('supplier_address')}}</textarea>
-                                        <label class="form-label">Address *</label>
-                                         @if($errors->has('supplier_address'))
-                                            <div class="error">
-                                                {{$errors->first('supplier_address')}}
-                                            </div>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <button class="btn btn-primary waves-effect" type="submit">SAVE</button>
-                            </form>
-                        </div>
+    <div class="w-full">
+        <div class="bg-white rounded-lg shadow-md border border-gray-100 overflow-hidden">
+            
+            {{-- Card Header --}}
+            <div class="p-5 border-b border-gray-100 flex items-center justify-between">
+                <h2 class="text-lg font-semibold text-gray-700 uppercase">Create Supplier Information</h2>
+                
+                {{-- Header Dropdown Menu --}}
+                <div class="relative" x-data="{ open: false }">
+                    <button @click="open = !open" class="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full focus:outline-none">
+                        <i class="material-icons">more_vert</i>
+                    </button>
+                    
+                    <div x-show="open" 
+                         @click.away="open = false" 
+                         class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 border border-gray-100 z-10"
+                         style="display: none;">
+                        <a href="{{ route('supplier.index') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Supplier List</a>
+                        <a href="{{ route('supplier.create') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Add Supplier</a>
                     </div>
                 </div>
             </div>
+
+            {{-- Form Body --}}
+            <div class="p-6">
+                <form action="{{ route('supplier.store') }}" method="POST" enctype="multipart/form-data" class="space-y-5">
+                    @csrf 
+
+                    {{-- Supplier Name Field --}}
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Supplier Name <span class="text-rose-500">*</span></label>
+                        <input type="text" 
+                               name="supplier_name" 
+                               autocomplete="off" 
+                               value="{{ old('supplier_name') }}"
+                               class="w-full px-4 py-2 text-sm bg-gray-50 border @error('supplier_name') border-rose-500 @else border-gray-300 @enderror rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors">
+                        @error('supplier_name')
+                            <p class="mt-1 text-xs text-rose-500 font-medium">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    {{-- Email Field --}}
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Email <span class="text-rose-500">*</span></label>
+                        <input type="email" 
+                               name="supplier_email" 
+                               autocomplete="off" 
+                               value="{{ old('supplier_email') }}"
+                               class="w-full px-4 py-2 text-sm bg-gray-50 border @error('supplier_email') border-rose-500 @else border-gray-300 @enderror rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors">
+                        @error('supplier_email')
+                            <p class="mt-1 text-xs text-rose-500 font-medium">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    {{-- Phone Field --}}
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Phone <span class="text-rose-500">*</span></label>
+                        <input type="text" 
+                               name="supplier_phone" 
+                               autocomplete="off" 
+                               value="{{ old('supplier_phone') }}"
+                               class="w-full px-4 py-2 text-sm bg-gray-50 border @error('supplier_phone') border-rose-500 @else border-gray-300 @enderror rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors">
+                        @error('supplier_phone')
+                            <p class="mt-1 text-xs text-rose-500 font-medium">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    {{-- Country Field --}}
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Country <span class="text-rose-500">*</span></label>
+                        <input type="text" 
+                               name="country" 
+                               autocomplete="off" 
+                               value="{{ old('country') }}"
+                               class="w-full px-4 py-2 text-sm bg-gray-50 border @error('country') border-rose-500 @else border-gray-300 @enderror rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors">
+                        @error('country')
+                            <p class="mt-1 text-xs text-rose-500 font-medium">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    {{-- City Field --}}
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">City <span class="text-rose-500">*</span></label>
+                        <input type="text" 
+                               name="city" 
+                               autocomplete="off" 
+                               value="{{ old('city') }}"
+                               class="w-full px-4 py-2 text-sm bg-gray-50 border @error('city') border-rose-500 @else border-gray-300 @enderror rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors">
+                        @error('city')
+                            <p class="mt-1 text-xs text-rose-500 font-medium">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    {{-- State Field --}}
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">State <span class="text-rose-500">*</span></label>
+                        <input type="text" 
+                               name="state" 
+                               autocomplete="off" 
+                               value="{{ old('state') }}"
+                               class="w-full px-4 py-2 text-sm bg-gray-50 border @error('state') border-rose-500 @else border-gray-300 @enderror rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors">
+                        @error('state')
+                            <p class="mt-1 text-xs text-rose-500 font-medium">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    {{-- Postcode Field --}}
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Post Code <span class="text-rose-500">*</span></label>
+                        <input type="text" 
+                               name="postcode" 
+                               autocomplete="off" 
+                               value="{{ old('postcode') }}"
+                               class="w-full px-4 py-2 text-sm bg-gray-50 border @error('postcode') border-rose-500 @else border-gray-300 @enderror rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors">
+                        @error('postcode')
+                            <p class="mt-1 text-xs text-rose-500 font-medium">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    {{-- Address Textarea Field --}}
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Address <span class="text-rose-500">*</span></label>
+                        <textarea name="supplier_address" 
+                                  rows="4" 
+                                  maxlength="100" 
+                                  class="w-full px-4 py-2 text-sm bg-gray-50 border @error('supplier_address') border-rose-500 @else border-gray-300 @enderror rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none transition-colors">{{ old('supplier_address') }}</textarea>
+                        @error('supplier_address')
+                            <p class="mt-1 text-xs text-rose-500 font-medium">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    {{-- Submit Button --}}
+                    <div class="pt-3">
+                        <button type="submit" class="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-sm rounded-lg shadow-sm transition-colors uppercase tracking-wider focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            SAVE
+                        </button>
+                    </div>
+                </form>
+            </div>
+
         </div>
-     @endsection      
+    </div>
+</div>
+@endsection
