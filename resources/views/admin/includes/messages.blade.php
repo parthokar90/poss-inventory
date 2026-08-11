@@ -1,15 +1,45 @@
+<!-- SweetAlert2 CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-@if(Session()->has('success'))
 <script>
-   toastr.success("{!!Session::get('success')!!}");
-</script>
-@endif
+    // Success Alert
+    @if(session('success'))
+        Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: "{{ session('success') }}",
+            timer: 3000,
+            showConfirmButton: false
+        });
+    @endif
 
-@if(Session()->has('error'))
- <script>
-   toastr.error("{!!Session::get('error')!!}");
- </script>
-@endif
+    // Error Alert
+    @if(session('error'))
+        Swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: "{{ session('error') }}",
+            confirmButtonText: 'OK'
+        });
+    @endif
+
+    // Warning Alert
+    @if(session('warning'))
+        Swal.fire({
+            icon: 'warning',
+            title: 'Warning!',
+            text: "{{ session('warning') }}",
+            confirmButtonText: 'OK'
+        });
+    @endif
+
+    // Info Alert
+    @if(session('info'))
+        Swal.fire({
+            icon: 'info',
+            title: 'Info!',
+            text: "{{ session('info') }}",
+            confirmButtonText: 'OK'
+        });
+    @endif
+</script>

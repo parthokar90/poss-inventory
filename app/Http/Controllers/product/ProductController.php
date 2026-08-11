@@ -5,15 +5,8 @@ namespace App\Http\Controllers\product;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\product\Product;
-use App\warehouse\Warehouse;
-use App\product\ProductWarehouse;
-use App\varients\Varients;
-use App\varients\ProductVarient;
-use App\brand\Brand;
-use App\category\Category;
-use App\units\Units;
-use App\tax\Taxrate;
 use App\Services\ProductService;
+use Illuminate\Support\Facades\Log;
 use DB;
 use App\Http\Requests\ProductValidationRequest;
 
@@ -53,9 +46,15 @@ class ProductController extends Controller
     {
         try {
             $service->storeProduct($request);
-            return redirect()->route('product.index')->with("success", "Saved!");
+            return redirect()->route('product.index')->with("success", "Product created successfully!");
         } catch (\Exception $e) {
-            return back()->with("error", $e->getMessage());
+            // Log the exact error details for debugging
+            Log::error("Product creation failed: " . $e->getMessage(), [
+                'file' => $e->getFile(),
+                'line' => $e->getLine()
+            ]);
+
+            return back()->withInput()->with("error", $e->getMessage());
         }
     }
 

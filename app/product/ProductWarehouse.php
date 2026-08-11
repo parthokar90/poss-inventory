@@ -9,6 +9,16 @@ use App\product\Product;
 
 class ProductWarehouse extends Model
 {
+
+    protected $fillable = [
+        'product_id',
+        'warehouse_id',
+        'varient_id',
+        'qty',
+        'alert_qty',
+        'racks',
+    ];
+    
     public function Warehouses()
     {
         return $this->belongsTo(Warehouse::class, 'warehouse_id');
