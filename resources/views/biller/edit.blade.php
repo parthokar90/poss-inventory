@@ -1,188 +1,113 @@
- @extends('admin.layouts.master')
-   @section('title') Dashboard | Edit Billers @endsection
-   @section('content')
-   <style>
-   .error{
-       color:red;
-    }
-   </style>
-       <div class="container-fluid">
-            <div class="block-header">
-                <h2>BILLER</h2>
-            </div>
-            <div class="row clearfix">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <div class="card">
-                        <div class="header">
-                            <h2>EDIT BILLER INFORMATION</h2>
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="{{route('billers.index')}}">List</a></li>
-                                        <li><a href="{{route('billers.create')}}">Add</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
+@extends('admin.layouts.master')
+
+@section('title', 'Edit Biller')
+
+@section('content')
+<div class="container mx-auto px-4 py-6 max-w-4xl">
+    <!-- Card Container -->
+    <div class="bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden">
+        <!-- Card Header -->
+        <div class="p-6 border-b border-slate-100 flex items-center justify-between">
+            <h2 class="text-xl font-bold text-slate-800">Edit Biller Details</h2>
+            <a href="{{ route('billers.index') }}" 
+               class="text-sm font-medium text-slate-500 hover:text-slate-700 flex items-center gap-1">
+                <i class="material-icons text-base">arrow_back</i> Back to List
+            </a>
+        </div>
+
+        <!-- Form Body -->
+        <div class="p-6">
+            <form action="{{ route('billers.update', $edit->id) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+                @csrf
+                @method('PATCH')
+
+                <!-- Grid Layout for Form Fields -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Company Name -->
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Company <span class="text-rose-500">*</span></label>
+                        <input type="text" name="company" value="{{ old('company', $edit->company) }}" autocomplete="off"
+                               class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all outline-none text-slate-800 @error('company') border-rose-500 @enderror">
+                        @error('company')
+                            <p class="mt-1 text-xs text-rose-500">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <!-- Full Name -->
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Full Name <span class="text-rose-500">*</span></label>
+                        <input type="text" name="name" value="{{ old('name', $edit->name) }}" autocomplete="off"
+                               class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all outline-none text-slate-800 @error('name') border-rose-500 @enderror">
+                        @error('name')
+                            <p class="mt-1 text-xs text-rose-500">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <!-- Email Address -->
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Email Address <span class="text-rose-500">*</span></label>
+                        <input type="email" name="email" value="{{ old('email', $edit->email) }}" autocomplete="off"
+                               class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all outline-none text-slate-800 @error('email') border-rose-500 @enderror">
+                        @error('email')
+                            <p class="mt-1 text-xs text-rose-500">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <!-- Phone Number -->
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Phone Number <span class="text-rose-500">*</span></label>
+                        <input type="text" name="phone" value="{{ old('phone', $edit->phone) }}" autocomplete="off"
+                               class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all outline-none text-slate-800 @error('phone') border-rose-500 @enderror">
+                        @error('phone')
+                            <p class="mt-1 text-xs text-rose-500">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <!-- VAT Number -->
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">VAT Number</label>
+                        <input type="text" name="vat_number" value="{{ old('vat_number', $edit->vat_number) }}" autocomplete="off"
+                               class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all outline-none text-slate-800 @error('vat_number') border-rose-500 @enderror">
+                        @error('vat_number')
+                            <p class="mt-1 text-xs text-rose-500">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <!-- Profile Image Field with Current Image Preview -->
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Profile Image</label>
+                        <div class="flex items-center gap-4">
+                            @if($edit->image)
+                                <img src="{{ asset($edit->image) }}" alt="Current Image" class="w-12 h-12 rounded-lg object-cover border border-slate-200">
+                            @endif
+                            <input type="file" name="image" 
+                                   class="w-full text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 cursor-pointer border border-slate-300 rounded-lg p-1">
                         </div>
-                        <div class="body">
-                          <form action="{{route('billers.update',$edit->id)}}" method="POST" enctype="multipart/form-data">
-                              {{ csrf_field() }}
-                             {{ method_field('PATCH') }} 
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="company" autocomplete="off" value="{{$edit->company}}">
-                                        <label class="form-label">Company *</label>
-                                         @if($errors->has('company'))
-                                            <div class="error">
-                                                {{$errors->first('company')}}
-                                            </div>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="phone" autocomplete="off" value="{{$edit->phone}}">
-                                        <label class="form-label">Phone *</label>
-                                         @if($errors->has('phone'))
-                                            <div class="error">
-                                                {{$errors->first('phone')}}
-                                            </div>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="email" autocomplete="off" value="{{$edit->email}}">
-                                        <label class="form-label">Email *</label>
-                                         @if($errors->has('email'))
-                                            <div class="error">
-                                                {{$errors->first('email')}}
-                                            </div>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="vat_no" autocomplete="off" value="{{$edit->vat_no}}">
-                                        <label class="form-label">Vat No *</label>
-                                         @if($errors->has('vat_no'))
-                                            <div class="error">
-                                                {{$errors->first('vat_no')}}
-                                            </div>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="gst_no" autocomplete="off" value="{{$edit->gst_no}}">
-                                        <label class="form-label">Gst No *</label>
-                                         @if($errors->has('gst_no'))
-                                            <div class="error">
-                                                {{$errors->first('gst_no')}}
-                                            </div>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="postcode" autocomplete="off" value="{{$edit->postcode}}">
-                                        <label class="form-label">Post Code *</label>
-                                         @if($errors->has('postcode'))
-                                            <div class="error">
-                                                {{$errors->first('postcode')}}
-                                            </div>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="country" autocomplete="off" value="{{$edit->country}}">
-                                        <label class="form-label">Country *</label>
-                                         @if($errors->has('country'))
-                                            <div class="error">
-                                                {{$errors->first('country')}}
-                                            </div>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="city" autocomplete="off" value="{{$edit->city}}">
-                                        <label class="form-label">City *</label>
-                                         @if($errors->has('city'))
-                                            <div class="error">
-                                                {{$errors->first('city')}}
-                                            </div>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="state" autocomplete="off" value="{{$edit->state}}">
-                                        <label class="form-label">State *</label>
-                                         @if($errors->has('state'))
-                                            <div class="error">
-                                                {{$errors->first('state')}}
-                                            </div>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                  <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <img width="100px" height="50px" src="{{asset('biller_logo/'.$edit->logo)}}">
-                                        <input type="file" class="form-control" name="logo">
-                                         @if($errors->has('logo'))
-                                            <div class="error">
-                                                {{$errors->first('logo')}}
-                                            </div>
-                                        @endif
-                                    </div>
-                                    <input type="hidden" name="d_logo" value="{{$edit->logo}}">
-                                </div>
-                     
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <textarea name="address" cols="30" rows="5" maxlength="100" class="form-control no-resize">{{$edit->address}}</textarea>
-                                        <label class="form-label">Address </label>
-                                         @if($errors->has('address'))
-                                            <div class="error">
-                                                {{$errors->first('address')}}
-                                            </div>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <select class="form-control" name="status">
-                                           @if($edit->status==1)
-                                            <option value="1" selected>Active</option>
-                                            <option value="0">Inactive</option>
-                                            @else 
-                                            <option value="1">Active</option>
-                                            <option value="0" selected>Inactive</option>
-                                           @endif  
-                                        </select>
-                                     </div>
-                                </div>
-
-                                <button class="btn btn-primary waves-effect" type="submit">UPDATE</button>
-                            </form>
-                        </div>
+                        @error('image')
+                            <p class="mt-1 text-xs text-rose-500">{{ $message }}</p>
+                        @enderror
                     </div>
                 </div>
-            </div>
+
+                <!-- Address Field -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-2">Address <span class="text-rose-500">*</span></label>
+                    <textarea name="address" rows="3"
+                              class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all outline-none text-slate-800 @error('address') border-rose-500 @enderror">{{ old('address', $edit->address) }}</textarea>
+                    @error('address')
+                        <p class="mt-1 text-xs text-rose-500">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <!-- Form Submit Action -->
+                <div class="pt-4 flex justify-end">
+                    <button type="submit" 
+                            class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-6 py-2.5 rounded-lg shadow hover:shadow-lg transition-all duration-200">
+                        UPDATE BILLER
+                    </button>
+                </div>
+            </form>
         </div>
-     @endsection      
+    </div>
+</div>
+@endsection
