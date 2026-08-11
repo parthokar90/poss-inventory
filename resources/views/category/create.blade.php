@@ -1,77 +1,79 @@
- @extends('admin.layouts.master')
-   @section('title') Dashboard | Add Category @endsection
-   @section('content')
-   <style>
-   .error{
-       color:red;
-    }
-   </style>
-       <div class="container-fluid">
-            <div class="block-header">
-                <h2>CATEGORY</h2>
-            </div>
-            <div class="row clearfix">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <div class="card">
-                        <div class="header">
-                            <h2>CREATE CATEGORY INFORMATION</h2>
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="{{route('category.index')}}">List</a></li>
-                                        <li><a href="{{route('category.create')}}">Add</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="body">
-                          <form action="{{route('category.store')}}" method="POST" enctype="multipart/form-data">
-                             @csrf 
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="category_name" autocomplete="off" value="{{old('category_name')}}">
-                                        <label class="form-label">Category Name *</label>
-                                         @if($errors->has('category_name'))
-                                            <div class="error">
-                                                {{$errors->first('category_name')}}
-                                            </div>
-                                        @endif
-                                    </div>
-                                </div>
+@extends('admin.layouts.master')
 
-                                @if($list->count()>0)
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <select class="form-control" name="parent_id">
-                                            <option value="0">Chose Parent</option>
-                                             @foreach($list as $item)
-                                               <option value="{{$item->id}}">{{$item->category_name}}</option>
-                                             @endforeach 
-                                        </select>
-                                     </div>
-                                </div>
-                                @endif 
+@section('title', 'Dashboard | Add Category')
 
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="file" class="form-control" name="image">
-                                    </div>
-                                </div>
-                     
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <textarea name="description" cols="30" rows="5" maxlength="100" class="form-control no-resize">{{old('description')}}</textarea>
-                                        <label class="form-label">Description </label>
-                                    </div>
-                                </div>
-                                <button class="btn btn-primary waves-effect" type="submit">SAVE</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+@section('content')
+<div class="container mx-auto px-4 py-6">
+    <!-- Page Header -->
+    <div class="mb-6">
+        <h2 class="text-2xl font-bold text-gray-800 tracking-wide uppercase">Category</h2>
+    </div>
+
+    <!-- Main Card Content -->
+    <div class="bg-white shadow-md rounded-lg overflow-hidden border border-gray-100">
+        <div class="p-6 border-b border-gray-200 flex justify-between items-center">
+            <h2 class="text-lg font-semibold text-gray-700 uppercase">Create Category Information</h2>
+            
+            <a href="{{ route('category.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white text-sm font-medium rounded-lg shadow-sm transition-colors duration-200">
+                Category List
+            </a>
         </div>
-     @endsection      
+
+        <div class="p-6">
+            <form action="{{ route('category.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+                @csrf
+
+                <!-- Category Name Input -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Category Name <span class="text-red-500">*</span></label>
+                    <input type="text" 
+                           name="category_name" 
+                           autocomplete="off" 
+                           value="{{ old('category_name') }}"
+                           class="w-full px-4 py-2 border @error('category_name') border-red-500 @else border-gray-300 @enderror rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                    @error('category_name')
+                        <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <!-- Parent Category Select Box -->
+                @if($list->count() > 0)
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Parent Category</label>
+                    <select name="parent_id" class="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                        <option value="0">Choose Parent</option>
+                        @foreach($list as $item)
+                            <option value="{{ $item->id }}">{{ $item->category_name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                @endif
+
+                <!-- Image Upload Input -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Category Image</label>
+                    <input type="file" 
+                           name="image" 
+                           class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 border border-gray-300 rounded-lg cursor-pointer focus:outline-none">
+                </div>
+
+                <!-- Description Textarea -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                    <textarea name="description" 
+                              rows="4" 
+                              maxlength="100" 
+                              class="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent resize-none">{{ old('description') }}</textarea>
+                </div>
+
+                <!-- Form Submit Button -->
+                <div>
+                    <button type="submit" class="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-sm rounded-lg shadow-sm transition-colors duration-200">
+                        SAVE
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endsection
