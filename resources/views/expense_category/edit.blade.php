@@ -1,67 +1,70 @@
- @extends('admin.layouts.master')
-   @section('title') Dashboard | Edit Category @endsection
-   @section('content')
-   <style>
-   .error{
-       color:red;
-    }
-   </style>
-       <div class="container-fluid">
-            <div class="block-header">
-                <h2>EXPENSE CATEGORY</h2>
-            </div>
-            <div class="row clearfix">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <div class="card">
-                        <div class="header">
-                            <h2>EDIT EXPENSE CATEGORY INFORMATION</h2>
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="{{route('expense.index')}}">List</a></li>
-                                        <li><a href="{{route('expense.create')}}">Add</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="body">
-                          <form action="{{route('expense.update',$edit->id)}}" method="POST" enctype="multipart/form-data">
-                            {{ csrf_field() }}
-                             {{ method_field('PATCH') }} 
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="category_name" autocomplete="off" value="{{$edit->category_name}}">
-                                        <label class="form-label">Category *</label>
-                                         @if($errors->has('category_name'))
-                                            <div class="error">
-                                                {{$errors->first('category_name')}}
-                                            </div>
-                                        @endif
-                                    </div>
-                                </div>
+@extends('admin.layouts.master')
 
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <select class="form-control" name="status">
-                                           @if($edit->status==1)
-                                            <option value="1" selected>Active</option>
-                                            <option value="0">Inactive</option>
-                                            @else 
-                                            <option value="1">Active</option>
-                                            <option value="0" selected>Inactive</option>
-                                           @endif  
-                                        </select>
-                                     </div>
-                                </div>
+@section('title', 'Dashboard | Edit Category')
 
-                                <button class="btn btn-primary waves-effect" type="submit">UPDATE</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+@section('content')
+<div class="container mx-auto px-4 py-6">
+    <!-- Page Header -->
+    <div class="mb-6">
+        <h2 class="text-2xl font-bold text-gray-800 tracking-wide uppercase">Expense Category</h2>
+    </div>
+
+    <!-- Main Card Content -->
+    <div class="bg-white shadow-md rounded-lg overflow-hidden border border-gray-100">
+        <!-- Card Header -->
+        <div class="p-6 border-b border-gray-200 flex justify-between items-center">
+            <h2 class="text-lg font-semibold text-gray-700 uppercase">Edit Expense Category Information</h2>
+            
+            <div class="flex space-x-2">
+                <a href="{{ route('expense.index') }}" 
+                   class="inline-flex items-center px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white text-sm font-medium rounded-lg shadow-sm transition-colors duration-200">
+                    List
+                </a>
+                <a href="{{ route('expense.create') }}" 
+                   class="inline-flex items-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg shadow-sm transition-colors duration-200">
+                    Add
+                </a>
             </div>
         </div>
-     @endsection      
+
+        <!-- Form Section -->
+        <div class="p-6">
+            <form action="{{ route('expense.update', $edit->id) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+                @csrf
+                @method('PATCH')
+
+                <!-- Category Name Input -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Category <span class="text-red-500">*</span></label>
+                    <input type="text" 
+                           name="category_name" 
+                           autocomplete="off" 
+                           value="{{ $edit->category_name }}" 
+                           class="w-full px-4 py-2 border @error('category_name') border-red-500 @else border-gray-300 @enderror rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                    @error('category_name')
+                        <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <!-- Status Selection -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                    <select name="status" 
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                        <option value="1" {{ $edit->status == 1 ? 'selected' : '' }}>Active</option>
+                        <option value="0" {{ $edit->status == 0 ? 'selected' : '' }}>Inactive</option>
+                    </select>
+                </div>
+
+                <!-- Submit Button -->
+                <div>
+                    <button type="submit" 
+                            class="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-sm rounded-lg shadow-sm transition-colors duration-200">
+                        UPDATE
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endsection

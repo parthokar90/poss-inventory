@@ -1,52 +1,55 @@
- @extends('admin.layouts.master')
-   @section('title') Dashboard | Add Category @endsection
-   @section('content')
-   <style>
-   .error{
-       color:red;
-    }
-   </style>
-       <div class="container-fluid">
-            <div class="block-header">
-                <h2>EXPENSE CATEGORY</h2>
-            </div>
-            <div class="row clearfix">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <div class="card">
-                        <div class="header">
-                            <h2>CREATE EXPENSE CATEGORY INFORMATION</h2>
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="{{route('expense.index')}}">List</a></li>
-                                        <li><a href="{{route('expense.create')}}">Add</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="body">
-                          <form action="{{route('expense.store')}}" method="POST">
-                             @csrf 
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="category_name" autocomplete="off" value="{{old('category_name')}}">
-                                        <label class="form-label">Category Name *</label>
-                                         @if($errors->has('category_name'))
-                                            <div class="error">
-                                                {{$errors->first('category_name')}}
-                                            </div>
-                                        @endif
-                                    </div>
-                                </div>
+@extends('admin.layouts.master')
 
-                                <button class="btn btn-primary waves-effect" type="submit">SAVE</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+@section('title', 'Dashboard | Add Category')
+
+@section('content')
+<div class="container mx-auto px-4 py-6">
+    <!-- Page Header -->
+    <div class="mb-6">
+        <h2 class="text-2xl font-bold text-gray-800 tracking-wide uppercase">Expense Category</h2>
+    </div>
+
+    <!-- Main Card Content -->
+    <div class="bg-white shadow-md rounded-lg overflow-hidden border border-gray-100">
+        <!-- Card Header -->
+        <div class="p-6 border-b border-gray-200 flex justify-between items-center">
+            <h2 class="text-lg font-semibold text-gray-700 uppercase">Create Expense Category Information</h2>
+            
+            <div class="flex space-x-2">
+                <a href="{{ route('expense.index') }}" 
+                   class="inline-flex items-center px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white text-sm font-medium rounded-lg shadow-sm transition-colors duration-200">
+                    List
+                </a>
             </div>
         </div>
-     @endsection      
+
+        <!-- Form Section -->
+        <div class="p-6">
+            <form action="{{ route('expense.store') }}" method="POST" class="space-y-6">
+                @csrf
+
+                <!-- Category Name Input -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Category Name <span class="text-red-500">*</span></label>
+                    <input type="text" 
+                           name="category_name" 
+                           autocomplete="off" 
+                           value="{{ old('category_name') }}" 
+                           class="w-full px-4 py-2 border @error('category_name') border-red-500 @else border-gray-300 @enderror rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                    @error('category_name')
+                        <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <!-- Submit Button -->
+                <div>
+                    <button type="submit" 
+                            class="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-sm rounded-lg shadow-sm transition-colors duration-200">
+                        SAVE
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endsection
